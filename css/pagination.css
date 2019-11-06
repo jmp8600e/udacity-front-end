@@ -1,0 +1,21 @@
+/* pagination related styling */
+.center {
+  text-align: center;
+}
+
+.pagination {
+  display: inline-block;  
+  text-align: center;
+  float: middle;
+}
+
+.pagination a {
+  float: left;
+  padding: 8px 16px;
+  transition: background-color .3s;
+}
+
+.pagination a.active {
+  background-color: #eaeaea;
+  border: 1px solid #eaeaea;
+}

@@ -1,0 +1,21 @@
+/* css file for archives.html page */
+
+.archives-flex-container-cards {
+  display: flex;
+  flex-direction: column;
+  margin: 2px;
+}
+
+.archives-blog-card{
+    border: 1px solid #e9e9e9;
+    background-color: #f9f9ff;
+    width: 490px !important;
+    text-align: center;
+    margin: 5px 0px 5px 0px;
+}
+.archives-blog-img img{
+    height:75px;
+    width: 75px; 
+    float: left;
+    padding: 5px;
+}
