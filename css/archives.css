@@ -19,3 +19,9 @@
     float: left;
     padding: 5px;
 }
+
+.archives-blog-content h5,.archives-blog-content h6,.archives-blog-content p{
+    margin: 0.1em;
+    padding: 2px;
+    text-align: left;
+    line-height: 12px;
