@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Weather Journal App</title>
+  <!-- Load Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Fira+Sans:900|Merriweather&display=swap" rel="stylesheet">  <!-- Load Styles -->
+  <link href="css/styles.css" rel="stylesheet">
+</head>
+<body>
+  <!-- HTML Follows BEM naming conventions 
+  IDs are only used for sections to connect menu achors to sections -->
+  <header class="page__header">
+    <nav class="navbar__menu">
+      <!-- Navigation starts as empty UL that will be populated with JS -->
+      <ul id="navbar__list">
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <header class="main__hero">
+      <h1>Weather Journal App</h1>
+    </header>
+    <!-- Each Section has an ID (used for the anchor) and 
+    a data attribute that will populate the li node.
+    Adding more sections will automatically populate nav.
+    The first section is set to active class by default -->
+    <section id="ZipCode Search" data-nav="ZipCode Search" class="your-active-class">
+      <div class="landing__container">
+        <p>In this section enter zipcode to get real time weather information.</p>
+        <h2>Zip Code</h2>
+            <form name="getWeather" action="/" onsubmit="return executeForm3()" method="post">
+              <label for="zip">Enter Zip Code Here:</label>
+              <input type="text" pattern="[0-9]{5}" id="zip" name="zip"><br><br>
+              <label>Enter Your feelings here:</label>
+              <textarea rows="3" cols="50" id="feelings"></textarea><br>        
+              <button type="button" id="generate">GO!</button>   
+            </form><br>         
+        <div id="entryHolder">
+            <div id="date"></div>
+            <div id="temp"></div>
+            <div id="content"></div>
+        </div>  
+     </div>
+    </section>
+  </main>
+  <footer class="page__footer">
+    <p>&copy Udacity</p>
+  </footer>
+<script src="js/app.js"></script>
+<script src="js/app2.js"></script>
+</body>
+</html>
