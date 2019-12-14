@@ -1,6 +1,6 @@
 # Project: Weather Journal App
 
-I have used ui similiar to Landing Page project and updated that to meet this project requirements. 
+This web application uses node.js Runtime Environment to start a lightweigh web server which presents index.html to the user. The web page asks for zip code and users own input about how they feel about current weather in the area. Then application usese OpenWeahterAPI to get real time Weather information and stores temprature and date/time value in the JS dictionary. Then it dynamically updates the UI provinding this information to the user. The project is completed as per the rubirics requirements. I have used UI similiar to Landing Page project and updated that to meet this project requirements. Please check below sections for more information.  
 
 ### Grader Access info    
 - Download the complete project from the github 
@@ -32,10 +32,10 @@ I have used ui similiar to Landing Page project and updated that to meet this pr
 
 ### Third-Party Resources
 - Research based resources
-    https://stackoverflow.com
-    https://w3schools.com
-    https://developer.mozilla.org/
-    https://dillinger.io
+    - https://stackoverflow.com
+    - https://w3schools.com
+    - https://developer.mozilla.org/
+    - https://dillinger.io
 
 Thanks,
--Jatin
+Jatin
