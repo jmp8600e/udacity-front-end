@@ -6,7 +6,7 @@ const getWeatherInfo = ()=>{
     if (zipCode == "" || feelings =="") {
         alert("zipcode and Feelings must be filled out");
     } else {
-        let appId = 'APPID=81ab9519a11e3f57765554bfd777ed5b' // storing Appid created for OpenWeatherAPI
+        const appId = 'APPID=81ab9519a11e3f57765554bfd777ed5b' // storing Appid created for OpenWeatherAPI
         // calling openWeatherApi function, chained promises which gets API data, POSTs data to the server.js endpoing and finally updates the UI
         openWeatherApi(zipCode,appId).then(function(projectData){
             projectData.feelings = feelings; // adding feelings to the data that came from OpenWeatherAPI
