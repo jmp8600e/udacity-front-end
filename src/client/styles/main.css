@@ -1,0 +1,219 @@
+body {
+    line-height: 20px;
+    font-size: 14px;
+    font-family: "Inconsolata", monospace;
+    font-weight: normal;
+    color: #777777;
+}
+
+/* global paragraph and ul font size */
+p,ul{
+    font-size: 14px;
+}
+
+/* global input and textarea styling */
+input,textarea {
+  
+  padding: 12px 20px;
+  margin: 8px 0;
+  width: 100%;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+
+
+@media(max-width:767px){
+#sidebar{
+    Background-color: #eaeaea;
+}    
+}
+
+@media(min-width:768px){
+#sidebar{
+    Background-color: #eaeaea;
+    width: 210px !important;
+}    
+}
+
+@media(max-width:767px){
+#main{
+    background-color: #ffffff;
+}
+}
+
+@media(min-width:768px){
+#main{
+    background-color: #ffffff;
+    width: 760px;    
+}
+}
+
+.form-card{
+    width: 100%;
+    border: 1px solid #e9e9e9;
+    padding: 10px;
+    background-color: #f9f9ff;
+    height: 430px !important;
+    text-align: left;
+}
+
+
+
+#header { grid-area: header; }
+#sidebar { grid-area: menu; }
+#main { grid-area: main; }
+#footer { grid-area: footer; }
+
+@media(max-width:767px){
+.grid-container {
+  display: grid;
+  grid:
+  'header'
+  'menu'
+  'main' 
+  'footer';
+  grid-gap: 10px;
+  padding: 10px;
+}
+}
+
+@media(min-width:768px){
+.grid-container {
+  max-width: 978px;
+  margin: auto;
+  display: grid;
+  grid:
+  'header header header header header header'
+  'menu main main main main main'
+  'footer footer  footer footer footer footer';
+  grid-gap: 10px;
+  padding: 10px;
+}
+
+/* sidebar menu vertical flex*/
+.flex-container-sidebar {
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+}
+}
+
+/* horizontal sidebar for mobile */
+@media(max-width:767px){
+.flex-container-sidebar {
+  display: flex;
+  margin: 5px;
+}
+}
+
+@media(min-width:768px){
+/* main cards horizontal flex*/
+.flex-container-cards {
+  display: flex;
+}
+}
+
+/* vertical cards for mobile */
+@media(max-width:767px){
+.flex-container-cards {
+  display: flex;
+  flex-direction: column;
+}
+}
+
+/* need one for about.html to center text */
+@media(max-width:767px){
+#about-main{
+    background-color: #ffffff;
+    text-align: center;
+}
+}
+
+@media(min-width:768px){
+#about-main{
+    background-color: #ffffff;
+    width: 800px;    
+    text-align: center;
+}
+}
+
+/* for all forms inputs */
+@media(min-width:768px){
+#form-main{
+  margin-top: 100px;
+  margin-bottom: 100px;
+  width: 800px;
+}
+}
+
+@media(max-width:767px){
+#form-main{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+}
+
+/* for proper spacing between main cards*/
+.flex-container-cards > div {
+  margin: 10px;
+}
+
+
+/* proper padding/margin for sidebar items*/
+#url,#txt{
+    padding: 2px 2px 2px 2px;
+    margin: 2px 2px 2px 2px;
+}
+
+/* various icons of sidebar menu items */
+#url:before {
+    content: "";
+    background: url("../img/copy.png") no-repeat;
+    width: 27px;
+    height: 24px;
+    float: left;
+    margin: 0 6px 0 0;
+}
+#txt:before {
+    content: "";
+    background: url("../img/contact-us.png") no-repeat;
+    width: 27px;
+    height: 24px;
+    float: left;
+    margin: 0 6px 0 0;
+}
+
+/* align logo to the left */
+.alignleft {
+	float: left;  
+    margin-left: 5px;
+    margin-top: 11px;
+}
+
+/* align login link to the right */
+.alignright {
+	float: right;
+}
+
+/* logo coloring */
+a.logo {
+    color: #969696;
+    font-size: 20px;
+}
+
+/* link related conigs */
+a:link {
+  text-decoration: none;
+  color: #707070;
+  font-family: "Lucida Console", Monaco, monospace;  
+  font-weight:normal;    
+}
+
+a:visited, a:hover, a:active{
+color: #707070
+}
+
+

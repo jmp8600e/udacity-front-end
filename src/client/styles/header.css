@@ -1,5 +1,19 @@
-header {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 40px;
+@media(max-width:767px){
+#header{
+    Background-color: rgb(95,95,95);
+    color: #949494;
+    font-weight: 100;
+    font-family: "Lucida Console", Monaco, monospace;  
+    font-weight:normal;    
+}
+}
+@media(min-width:768px){
+#header{
+    Background-color: rgb(95,95,95);
+    color: #9b9b9b;
+    font-weight: 100;
+    width: 978px !important; 
+    font-family: "Lucida Console", Monaco, monospace;   
+    font-weight:normal;
+}
 }

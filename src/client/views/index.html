@@ -1,43 +1,68 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Test</title>
-        <link rel="stylesheet" href="/styles/resets.css">
-        <link rel="stylesheet" href="/styles/base.css">
-        <link rel="stylesheet" href="/styles/header.css">
-        <link rel="stylesheet" href="/styles/form.css">
-        <link rel="stylesheet" href="/styles/footer.css">
+        <title>Evaluate News NLP</title>
+        <link rel="stylesheet" type="text/css" href="../styles/main.css">
+        <link rel="stylesheet" type="text/css" href="../styles/form.css">
+        <link rel="stylesheet" type="text/css" href="../styles/footer.css">
+        <link rel="stylesheet" type="text/css" href="../styles/header.css">
+     
     </head>
-
     <body>
-
-        <header>
-            <div class="">
-                Logo
+        <!-- sidebar https://colorlib.com/preview/#opium-->
+        <!-- section on left -->
+        <div class="grid-container">
+            <div id="sidebar">
+                <nav>
+                    <div class="flex-container-sidebar">
+                        <a id="url" href="#urlInfo">URL Classification</a>
+                        <a id="txt" href="#txtInfo">Sentiment Analysis</a>
+                    </div>
+                </nav>
+            </div>        
+        <!-- Header -->
+        <div id="header">
+            <div class="alignleft"><a href="index.html"  class="logo">Evaluate News NLP</a></div>
+        </div>
+        <!-- actual blogs -->
+        <div id="main" role="main">    
+            <div class="flex-container-cards" id="urlInfo">
+                <div class="form-card">
+                    <article >
+                            <header>
+                                <h3>URL Classification</h3>
+                                <p>Knowing the high-level semantic category of an unlabelled document such as a webpage or article can be extremely helpful in various applications. The Classification endpoint helps you categorize any text or URL according to a predefined taxonomy.</p>
+                                <form name="getURLClassigication">
+                                  <label for="url">Enter Article URL:</label>
+                                  <input type="text" id="url" name="url"><br><br>
+                                  <button type="button" id="generate1">GO!</button>   
+                                </form><br>                                
+                            </header>
+                    </article>
+                </div>
             </div>
-            <div class="">
-                navigation
-            </div>
-        </header>
-
-        <main>
-            <section>
-                <form class="" onsubmit="return handleSubmit(event)">
-                    <input id="name" type="text" name="input" value="" onblur="onBlur()" placeholder="Name">
-                    <input type="submit" name="" value="submit" onclick="return handleSubmit(event)" onsubmit="return handleSubmit(event)">
-                </form>
-            <section>
-
-            <section>
-                <strong>Form Results:</strong>
-                <div id="results"></div>
-            </section>
-        </main>
-
-        <footer>
-            <p>This is a footer</p>
-        </footer>
-      <script src="../js/nlpAPI.js"></script>
-    </body>
+            <div class="flex-container-cards" id="txtInfo">
+                <div class="form-card">
+                    <article  >
+                            <header>
+                                <h3>Sentiment Analysis</h3>
+                                <p>Extracting sentiment from a piece of text such as a tweet, a review or an article can provide us with valuable insight about the author's emotions and perspective: whether the tone is positive, neutral or negative, and whether the text is subjective (meaning it's reflecting the author's opinion) or objective (meaning it's expressing a fact). Our Sentiment Analysis endpoint is built exactly for this purpose.</p>
+                                <form name="getURLClassigication">
+                                  <label for="url">Enter a Sentance:</label>
+                                  <input type="text" id="url" name="url"><br><br>
+                                  <button type="button" id="generate2">GO!</button>   
+                                </form><br>                                
+                            </header>
+                    </article>
+                </div>
+            </div>            
+        </div>
+        <div id="footer">
+            <footer>
+                <p>Created by: Jatin Patel &#169 2019</p>
+            </footer>
+        </div>
+     </div> 
+    </body> 
 </html>
