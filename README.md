@@ -108,4 +108,24 @@ Once you are hooked up to the Aylien API, you are most of the way there! Along w
 A great step to take with your finished project would be to deploy it! Unfortunately its a bit out of scope for me to explain too much about how to do that here, but checkout [Netlify](https://www.netlify.com/) or [Heroku](https://www.heroku.com/) for some really intuitive free hosting options.
 
 npm install
+npm install webpack webpack-cli --save-dev
+npm install express
+npm install -D webpack-dev-server
+npm install AYLIEN/aylien_newsapi_nodejs
 npm install aylien_textapi
+npm install aylien-news-api
+npm install dotenv
+npm install -D @babel/core @babel/preset-env babel-loader
+npm install -D html-webpack-plugin
+npm install -D clean-webpack-plugin
+npm install -D style-loader
+npm install -D css-loader
+npm install file-loader --save-dev
+
+
+to be done:
+npm install --save-dev webpack-bundle-analyzer
+npm install sass-loader node-sass webpack --save-dev
+npm install cors
+npm install body-parser
+npm install -D mini-css-extract-plugin optimize-css-assets-webpack-plugin terser-webpack-plugin
