@@ -52,12 +52,16 @@ app.get('/getURLClassification/:articleURL', function (req, res) {
       'taxonomy': 'iab-qag'
     }, function(error, response) {
       if (error === null) {
-        urldata.language = `${response['language']}`      
+        urldata.language = `${response['language']}`;  
         urldata.confident =  `${response['categories'][0]['confident']}`;
         urldata.score = `${response['categories'][0]['score']}`;
         urldata.label1 = `${response['categories'][0]['label']}`;
         urldata.label2 = `${response['categories'][1]['label']}`;
         res.send(urldata);
+      } else {
+            urldata = {};
+            urldata.error = `${error}`;
+            res.send(urldata);
       }
     });
 
@@ -76,6 +80,10 @@ app.get('/getTXTSentiment/:sentance', function (req, res) {
         txtdata.polarity_confidence = `${response['polarity_confidence']}`;
         txtdata.subjectivity_confidence = `${response['subjectivity_confidence']}`;
         res.send(txtdata);          
+      } else {
+            txtdata = {};
+            txtdata.error = `${error}`;
+            res.send(txtdata);
       }
     });
 
