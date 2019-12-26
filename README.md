@@ -120,7 +120,10 @@ npm install -D html-webpack-plugin
 npm install -D clean-webpack-plugin
 npm install -D style-loader
 npm install -D css-loader
-npm install file-loader --save-dev
+npm install -D file-loader
+npm install body-parser
+npm install cors
+
 
 
 to be done:
