@@ -1,3 +1,4 @@
+// use of dotenv as require
 const dotenv = require('dotenv')
 dotenv.config()
 
@@ -36,54 +37,58 @@ app.get('/test', function (req, res) {
 
 var aylien = require("aylien_textapi");
 
-// set aylien API credentias
+// set aylien API credentials from .env file
 var textapi = new aylien({
   application_id: process.env.API_ID,
   application_key: process.env.APP_KEY
 });
 
-// use encodeURIComponent('https://www.cnet.com/roadshow/reviews/2020-honda-odyssey-review/')
-//http://localhost:8080/getURLClassification2/https%3A%2F%2Fwww.cnet.com%2Froadshow%2Freviews%2F2020-honda-odyssey-review%2F
-//http://localhost:8080/getURLClassification2/http%3A%2F%2Ftechcrunch.com%2F2015%2F07%2F16%2Fmicrosoft-will-never-give-up-on-mobile
-let urldata = {};
+// aylien API for URL Classification
+let urldata = {}; //initializing dictionary
 app.get('/getURLClassification/:articleURL', function (req, res) {
     textapi.classifyByTaxonomy({
-      'url': `${req.params.articleURL}`,
+      'url': `${req.params.articleURL}`,  //getting URL value from the node call to the function. 
       'taxonomy': 'iab-qag'
     }, function(error, response) {
       if (error === null) {
+        // no error so setting all needed values but 1st clearing the variable
+        urldata = {};
         urldata.language = `${response['language']}`;  
         urldata.confident =  `${response['categories'][0]['confident']}`;
         urldata.score = `${response['categories'][0]['score']}`;
         urldata.label1 = `${response['categories'][0]['label']}`;
         urldata.label2 = `${response['categories'][1]['label']}`;
-        res.send(urldata);
+        res.send(urldata); //returning the data back to the caller
       } else {
-            urldata = {};
-            urldata.error = `${error}`;
-            res.send(urldata);
+            //this means somekind of error
+            urldata = {}; // clearing the variable
+            urldata.error = `${error}`; //adding the error data
+            res.send(urldata); //returning the data back to the caller
       }
     });
 
 });
 
-//http://localhost:8080/getTXTSentiment/John%20is%20a%20very%20good%20football%20player
-let txtdata = {};
+// aylien API for sentance sentiment
+let txtdata = {}; //initializing dictionary
 app.get('/getTXTSentiment/:sentance', function (req, res) {
     textapi.sentiment({
-      text: `${req.params.sentance}`,
+      text: `${req.params.sentance}`, //getting URL value from the node call to the function.
       mode: 'tweet'
     }, function(error, response) {
       if (error === null) {
+        // no error so setting all needed values but 1st clearing the variable
+        urldata = {};
         txtdata.polarity = `${response['polarity']}`      
         txtdata.subjectivity =  `${response['subjectivity'][0]['confident']}`;
         txtdata.polarity_confidence = `${response['polarity_confidence']}`;
         txtdata.subjectivity_confidence = `${response['subjectivity_confidence']}`;
-        res.send(txtdata);          
+        res.send(txtdata);  //returning the data back to the caller        
       } else {
-            txtdata = {};
-            txtdata.error = `${error}`;
-            res.send(txtdata);
+            //this means somekind of error
+            txtdata = {}; // clearing the variable
+            txtdata.error = `${error}`; //adding the error data
+            res.send(txtdata); //returning the data back to the caller
       }
     });
 

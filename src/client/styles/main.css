@@ -216,4 +216,24 @@ a:visited, a:hover, a:active{
 color: #707070
 }
 
+.error {
+    color: red;
+}
+
+/* progress bar related styles */
+.bar-container{
+    width: 100%;
+    background: #ccc;
+    border: 1px solid #eee;
+    margin-bottom: 10px;
+}
+.loader{
+    height: 5px;
+    background: #434334;
+    width: 0px;
+    transition: width 10s ease;
+}
+.active .loader{
+    width: 100%;
+}
 
