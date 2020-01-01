@@ -129,6 +129,4 @@ npm install cors
 to be done:
 npm install --save-dev webpack-bundle-analyzer
 npm install sass-loader node-sass webpack --save-dev
-npm install cors
-npm install body-parser
 npm install -D mini-css-extract-plugin optimize-css-assets-webpack-plugin terser-webpack-plugin

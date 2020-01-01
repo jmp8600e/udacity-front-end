@@ -3,10 +3,10 @@
     <head>
         <meta charset="utf-8">
         <title>Evaluate News NLP</title>
-        <link rel="stylesheet" type="text/css" href="../styles/main.css">
-        <link rel="stylesheet" type="text/css" href="../styles/form.css">
-        <link rel="stylesheet" type="text/css" href="../styles/footer.css">
-        <link rel="stylesheet" type="text/css" href="../styles/header.css">
+       <!-- <link rel="stylesheet" href="../styles/main.css">
+        <link rel="stylesheet" href="../styles/form.css">
+        <link rel="stylesheet" href="../styles/footer.css">
+        <link rel="stylesheet" href="../styles/header.css"> -->
      
     </head>
     <body>
@@ -33,7 +33,7 @@
                             <header>
                                 <h3>URL Classification</h3>
                                 <p>Knowing the high-level semantic category of an unlabelled document such as a webpage or article can be extremely helpful in various applications. The Classification endpoint helps you categorize any text or URL according to a predefined taxonomy.</p>
-                                <form name="getURLClassigication" action="/" onsubmit="return getAylienURLInfo()">
+                                <form name="getURLClassigication" action="/" onsubmit="return Client.getAylienURLInfo()">
                                   <label for="url">Enter Article URL:</label>
                                   <input type="url" id="urlValue" name="urlVal" pattern="https?://.+" required><br>
                                   <button type="submit" id="generate1">GO!</button>   
@@ -80,6 +80,7 @@
             </footer>
         </div>
      </div> 
-     <script src="../js/AylienURL.js"></script>
+     <!-- we would not need below since we are using webpack -->
+     <!-- <script src="../js/AylienURL.js"></script> -->
     </body> 
 </html>

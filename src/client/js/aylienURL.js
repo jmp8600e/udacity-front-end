@@ -14,13 +14,13 @@ const getAylienURLInfo = ()=>{
         }, 10000);
     }, 0);
     // calling openAylienClassifyApi function, chained promises which gets API data and updates the UI
-    openAylienClassifyApi(url).then(function(projectData){
+    Client.openAylienClassifyApi(url).then(function(projectData){
         //updateUI after successfull execution of POST data
         document.getElementsByClassName('bar-container active')[0].remove(); //removal of progress bar
-        updateUI(projectData);
+        Client.updateUI(projectData);
     }).catch(function(error){
         // incase error from the Aylien API show a message on the UI that error has occured
-        updateUIError(error);
+        Client.updateUIError(error);
       });
 
    return false; // this is very important otherwise user will be moved away from the current page
@@ -29,7 +29,7 @@ const getAylienURLInfo = ()=>{
 
 // get data from node endpoint getURLClassification - this is async function
 const openAylienClassifyApi = async (url)=>{
-    let apiUrl = 'http://localhost:8080/getURLClassification' // holding initial part of api url for Aylien classify API
+    let apiUrl = 'http://localhost:8081/getURLClassification' // holding initial part of api url for Aylien classify API
     let fullUrl = `${apiUrl}/${url}`; //creating full API url
     const urlData = await fetch(fullUrl); // awaiting to get the data
      try{
@@ -76,7 +76,7 @@ const updateUI = (projectData) => {
         
     }  catch(error) {
         //console.log("error", error);
-        updateUIError(error);
+        Client.updateUIError(error);
     }    
 }
 
@@ -98,5 +98,10 @@ const updateUIError = (error)=>{
     divl2.innerHTML = ``;
 }
 
+// exporting it for webpack
+export { getAylienURLInfo };
+export { openAylienClassifyApi };
+export { updateUI };
+export { updateUIError };
 
   
