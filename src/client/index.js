@@ -2,6 +2,10 @@ import { getAylienURLInfo } from './js/aylienURL'
 import { openAylienClassifyApi } from './js/aylienURL'
 import { updateUI } from './js/aylienURL'
 import { updateUIError } from './js/aylienURL'
+import { getAylienTXTInfo } from './js/aylienTXT'
+import { openAylienTXTApi } from './js/aylienTXT'
+import { updateUI2 } from './js/aylienTXT'
+import { updateUIError2 } from './js/aylienTXT'
 
 import './styles/main.css'
 import './styles/form.css'
@@ -14,6 +18,10 @@ export {
     getAylienURLInfo,
     openAylienClassifyApi,
     updateUI,
-    updateUIError
+    updateUIError,
+    getAylienTXTInfo,
+    openAylienTXTApi,
+    updateUI2,
+    updateUIError2   
 }
 

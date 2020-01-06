@@ -33,7 +33,7 @@
                             <header>
                                 <h3>URL Classification</h3>
                                 <p>Knowing the high-level semantic category of an unlabelled document such as a webpage or article can be extremely helpful in various applications. The Classification endpoint helps you categorize any text or URL according to a predefined taxonomy.</p>
-                                <form name="getURLClassigication" action="/" onsubmit="return Client.getAylienURLInfo()">
+                                <form name="getURLClassification" action="/" onsubmit="return Client.getAylienURLInfo()">
                                   <label for="url">Enter Article URL:</label>
                                   <input type="url" id="urlValue" name="urlVal" pattern="https?://.+" required><br>
                                   <button type="submit" id="generate1">GO!</button>   
@@ -60,15 +60,30 @@
             </div>
             <div class="flex-container-cards" id="txtInfo">
                 <div class="form-card">
-                    <article  >
+                    <article>
                             <header>
                                 <h3>Sentiment Analysis</h3>
-                                <p>Extracting sentiment from a piece of text such as a tweet, a review or an article can provide us with valuable insight about the author's emotions and perspective: whether the tone is positive, neutral or negative, and whether the text is subjective (meaning it's reflecting the author's opinion) or objective (meaning it's expressing a fact). Our Sentiment Analysis endpoint is built exactly for this purpose.</p>
-                                <form name="getURLClassigication">
-                                  <label for="url">Enter a Sentance:</label>
-                                  <input type="text" id="url" name="url"><br><br>
-                                  <button type="button" id="generate2">GO!</button>   
-                                </form><br>                                
+                                <p>Extracting sentiment from a piece of text such as a tweet, a review or an article can provide us with valuable insight about the author's emotions and perspective: whether the tone is positive, neutral or negative, and whether the text is subjective (meaning it's reflecting the author's opinion) or objective (meaning it's expressing a fact).</p>
+                                <form name="getTXTClassification" action="/" onsubmit="return Client.getAylienTXTInfo()">
+                                  <label for="txt">Enter a Sentance:</label>
+                                  <input type="text" id="txtValue" name="txtVal" pattern="[A-Za-z,!;'\s]+[.?!]$" required title="Enter a Sentance"><br>
+                                  <button type="submit" id="generate2">GO!</button>   
+                                </form><br>  
+                                <!-- below holds divs for progres bar -->
+                                <div class="container2"></div>
+                                <div style="display: none">
+                                    <div class="bar-container2">
+                                        <div class="loader2">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- below holds divs for data returned by Aylien API -->                                
+                                <div id="entryHolder">
+                                    <div id="polarity"></div>
+                                    <div id="subjectivity"></div>
+                                    <div id="polarity_confidence"></div>
+                                    <div id="subjectivity_confidence"></div>
+                                </div>                                
                             </header>
                     </article>
                 </div>
