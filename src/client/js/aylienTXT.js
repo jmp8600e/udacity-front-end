@@ -94,10 +94,19 @@ const updateUIError2 = (error)=>{
     divlsbjecconf.innerHTML = ``;
 }
 
+
 // exporting it for webpack
 export { getAylienTXTInfo };
 export { openAylienTXTApi };
 export { updateUI2 };
 export { updateUIError2 };
 
+
   
+//jest  test function
+
+function testapi(url){
+    return openAylienTXTApi(url).length;
+}
+
+module.exports = testapi;

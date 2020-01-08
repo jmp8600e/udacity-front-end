@@ -123,6 +123,7 @@ npm install -D css-loader
 npm install -D file-loader
 npm install body-parser
 npm install cors
+npm install --save-dev jest
 
 
 
