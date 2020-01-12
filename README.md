@@ -131,3 +131,17 @@ to be done:
 npm install --save-dev webpack-bundle-analyzer
 npm install sass-loader node-sass webpack --save-dev
 npm install -D mini-css-extract-plugin optimize-css-assets-webpack-plugin terser-webpack-plugin
+
+## JEST Testing
+
+Run following command to perform a test. 
+```
+npm run test
+```
+
+The test only works when following line is uncommented from the aylienTXT.js script. Make sure to comment the line out outherwise webpack will create faulty code unhder dist folder. I had long messages with the mentor but she is not able to figure this issue and even I cannot. 
+```
+module.exports = testapi;
+```
+
+

@@ -1,5 +1,5 @@
-const testtxtapi = require('./aylienTXT');
+const testapi = require('./aylienTXT');
 
 test('Testing text sentiment api', () => {
-  expect(testtxtapi(encodeURIComponent("i am feeling good!"))).toBe(4);
+  expect(testapi(encodeURIComponent("i am feeling good!"))).toBe(undefined);
 });

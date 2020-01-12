@@ -94,6 +94,16 @@ const updateUIError2 = (error)=>{
     divlsbjecconf.innerHTML = ``;
 }
 
+  
+//jest  test function
+
+function testapi(url){
+    return openAylienTXTApi(url).length;
+}
+
+// comment below line when doing a webpack build as it breaks webpack, uncomment while performing jest test
+module.exports = testapi;
+
 
 // exporting it for webpack
 export { getAylienTXTInfo };
@@ -102,11 +112,3 @@ export { updateUI2 };
 export { updateUIError2 };
 
 
-  
-//jest  test function
-
-function testapi(url){
-    return openAylienTXTApi(url).length;
-}
-
-module.exports = testapi;
