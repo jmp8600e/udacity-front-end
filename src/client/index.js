@@ -7,10 +7,10 @@ import { openAylienTXTApi } from './js/aylienTXT'
 import { updateUI2 } from './js/aylienTXT'
 import { updateUIError2 } from './js/aylienTXT'
 
-import './styles/main.css'
-import './styles/form.css'
-import './styles/footer.css'
-import './styles/header.css'
+import './styles/main.scss'
+import './styles/form.scss'
+import './styles/footer.scss'
+import './styles/header.scss'
 
 
 // below are exported because output in webpack.dev/pord.js can use it

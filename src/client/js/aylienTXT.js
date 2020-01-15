@@ -102,7 +102,7 @@ function testapi(url){
 }
 
 // comment below line when doing a webpack build as it breaks webpack, uncomment while performing jest test
-module.exports = testapi;
+//module.exports = testapi;
 
 
 // exporting it for webpack
