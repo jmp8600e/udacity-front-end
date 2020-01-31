@@ -1,0 +1,189 @@
+body {
+    line-height: 20px;
+    font-size: 14px;
+    font-family: "Inconsolata", monospace;
+    font-weight: normal;
+    color: #777777;
+}
+
+/* global paragraph and ul font size */
+p,ul{
+    font-size: 14px;
+}
+
+/* global input and textarea styling */
+input,textarea {
+  
+  padding: 12px 20px;
+  margin: 8px 0;
+  width: 100%;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+
+
+@media(max-width:767px){
+#main{
+    background-color: #ffffff;
+}
+}
+
+@media(min-width:768px){
+#main{
+    background-color: #ffffff;
+    width: 99%;    
+}
+}
+
+.form-card{
+    width: 100%;
+    border: 1px solid #e9e9e9;
+    padding: 10px;
+    background-color: #f9f9ff;
+    height: 430px !important;
+    text-align: left;
+}
+
+
+
+#header { grid-area: header; }
+#main { grid-area: main; }
+#footer { grid-area: footer; }
+
+@media(max-width:767px){
+.grid-container {
+  display: grid;
+  grid:
+  'header'
+  'main' 
+  'footer';
+  grid-gap: 10px;
+  padding: 10px;
+}
+}
+
+@media(min-width:768px){
+.grid-container {
+  max-width: 978px;
+  margin: auto;
+  display: grid;
+  grid:
+  'header header header header header header'
+  'main main main main main main'
+  'footer footer  footer footer footer footer';
+  grid-gap: 10px;
+  padding: 10px;
+}
+
+
+@media(min-width:768px){
+/* main cards horizontal flex*/
+.flex-container-cards {
+  display: flex;
+}
+}
+
+/* vertical cards for mobile */
+@media(max-width:767px){
+.flex-container-cards {
+  display: flex;
+  flex-direction: column;
+}
+}
+
+/* need one for about.html to center text */
+@media(max-width:767px){
+#about-main{
+    background-color: #ffffff;
+    text-align: center;
+}
+}
+
+@media(min-width:768px){
+#about-main{
+    background-color: #ffffff;
+    width: 800px;    
+    text-align: center;
+}
+}
+
+/* for all forms inputs */
+@media(min-width:768px){
+#form-main{
+  margin-top: 100px;
+  margin-bottom: 100px;
+  width: 800px;
+}
+}
+
+@media(max-width:767px){
+#form-main{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+}
+
+/* for proper spacing between main cards
+.flex-container-cards > div {
+  margin: 10px;
+}*/
+
+
+
+/* align logo to the left */
+.alignleft {
+	float: left;  
+    margin-left: 5px;
+    margin-top: 11px;
+}
+
+/* align login link to the right */
+.alignright {
+	float: right;
+}
+
+/* logo coloring */
+a.logo {
+    color: #969696;
+    font-size: 20px;
+}
+
+/* link related conigs */
+a:link {
+  text-decoration: none;
+  color: #707070;
+  font-family: "Lucida Console", Monaco, monospace;  
+  font-weight:normal;    
+}
+
+a:visited, a:hover, a:active{
+color: #707070
+}
+
+.error {
+    color: red;
+}
+
+/* progress bar related styles */
+.bar-container, .bar-container2{
+    width: 100%;
+    background: #ccc;
+    border: 1px solid #eee;
+    margin-bottom: 10px;
+}
+.loader, .loader2{
+    height: 5px;
+    background: #434334;
+    width: 0px;
+    transition: width 10s ease;
+}
+.active .loader{
+    width: 100%;
+}
+
+.active .loader2{
+    width: 100%;
+}

@@ -1,0 +1,19 @@
+@media(min-width:768px){
+#footer{
+    Background-color: #ffffff;
+    padding: 2px 2px 2px 2px;
+    margin: 2px 2px 2px 2px;
+    text-align: center;
+    width: 978px !important;
+}
+}
+
+
+@media(max-width:767px){
+#footer{
+    Background-color: #ffffff;
+    padding: 2px 2px 2px 2px;
+    margin: 2px 2px 2px 2px;
+    text-align: center;    
+}
+}
