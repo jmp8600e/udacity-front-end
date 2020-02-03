@@ -14,6 +14,7 @@ This FEND Capstone  project is completed as per the project rubrics. This web ap
    - npm install body-parser
    - npm install cors
    - npm install node-fetch
+   - npm install dotenv
 
 -  The .env file must be present at the root of the project which should have username for GeoNames API, API Key for DarkSky and API key for Pixabay:
 ```

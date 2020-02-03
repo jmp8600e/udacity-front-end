@@ -3,7 +3,13 @@ npm install body-parser
 npm install express
 npm install cors
 npm install node-fetch
+npm install dotenv
 */
+// use of dotenv as require
+const dotenv = require('dotenv')
+dotenv.config()
+
+
 /* Express to run server and routes */
 const express = require('express');
 
@@ -99,9 +105,9 @@ const geonamesApi = async (url) => {
 app.get('/getFromGeonames/:destInfo', function (req, res) {   
     const url = 'http://api.geonames.org/searchJSON?q=' // this remains constant
     let destInfo = `${req.params.destInfo}`;  // get this from uri last part
-    let username = 'jmp8600e'; // need to get this from .env file
+    let username = process.env.USERNAME_GeoNames; // getting this from .env file
     const fullurl = `${url}${destInfo}&maxRows=1&username=${username}` // creating full url
-
+    //calling async function to get data from geonames
     geonamesApi(fullurl).then(function(destData){
         //destData = geonamesData;
         res.send(destData);

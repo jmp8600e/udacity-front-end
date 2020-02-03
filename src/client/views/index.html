@@ -26,7 +26,7 @@
                             <header>
                                 <h3>Travel Companion!!</h3>
                                 <p>This app will help organize your travel. Enter your destination information and date you are travelling and it will provide Weather Related information and other information that might help you organize your trip!</p>
-                                <form name="getURLClassification" action="/" onsubmit="return Client.getAylienURLInfo()">
+                                <form action="/" onsubmit="return getDestinationInfo()">
                                   <label for="dest">Enter Destination:</label>
                                   <input type="text" id="destValue" name="destVal" required><br>
                                   <label for="date">Enter Date:</label>
@@ -43,11 +43,11 @@
                                 </div>
                                 <!-- below holds divs for data returned by Aylien API -->                                
                                 <div id="entryHolder">
-                                    <div id="lang"></div>
-                                    <div id="score"></div>
-                                    <div id="confident"></div>
-                                    <div id="l1"></div>
-                                    <div id="l2"></div>
+                                    <div id="countryName"></div>
+                                    <div id="lat"></div>
+                                    <div id="lng"></div>
+                                    <div id="dest"></div>
+                                    <div id="travelDate"></div>
                                 </div>                                
                             </header>
                     </article>
@@ -61,7 +61,7 @@
         </div>
      </div> 
      <!-- we would not need below since we are using webpack -->
-     <!-- <script src="../js/AylienURL.js"></script> -->
+    <script src="../js/destInfo.js"></script>
      <!-- below for offline access -->
     <script>
         // Check that service workers are supported
