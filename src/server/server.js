@@ -102,14 +102,29 @@ const geonamesApi = async (url) => {
 }
 
 //Geonames API endpoint
-app.get('/getFromGeonames/:destInfo', function (req, res) {   
+app.get('/getFromGeonames/:destInfo/:travelDate', function (req, res) {   
     const url = 'http://api.geonames.org/searchJSON?q=' // this remains constant
-    let destInfo = `${req.params.destInfo}`;  // get this from uri last part
+    let destInfo = `${req.params.destInfo}`;  
+    let travelDate = `${req.params.travelDate}`;
+    let today = new Date(); // geting today's current time
+    let todayDate = (new Date(today.getFullYear(),today.getMonth(),today.getDate()).getTime() / 1000) - (today.getTimezoneOffset()*60)// getting today's date in GMT hence offset subtracted from the date this is bit complicated
+
     let username = process.env.USERNAME_GeoNames; // getting this from .env file
     const fullurl = `${url}${destInfo}&maxRows=1&username=${username}` // creating full url
     //calling async function to get data from geonames
     geonamesApi(fullurl).then(function(destData){
         //destData = geonamesData;
+        console.log(travelDate);
+        if (((travelDate - todayDate)/86400) > 7){
+            destData.travelDateGtSeven = travelDate;
+        }
+        else if (((travelDate - todayDate)/86400) < 0){
+            console.log(travelDate - todayDate);
+            destData.travelDateGtSeven = -1;
+        }
+        else {
+            destData.travelDateGtSeven = 0;
+        }
         res.send(destData);
     });
 });

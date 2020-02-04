@@ -26,7 +26,8 @@
                             <header>
                                 <h3>Travel Companion!!</h3>
                                 <p>This app will help organize your travel. Enter your destination information and date you are travelling and it will provide Weather Related information and other information that might help you organize your trip!</p>
-                                <form action="/" onsubmit="return getDestinationInfo()">
+                                <!-- form name CANNOT be same as onsubmit return funtction-->
+                                <form name="getInfo" action="/" onsubmit="return getDestinationInfo()">
                                   <label for="dest">Enter Destination:</label>
                                   <input type="text" id="destValue" name="destVal" required><br>
                                   <label for="date">Enter Date:</label>
@@ -48,6 +49,7 @@
                                     <div id="lng"></div>
                                     <div id="dest"></div>
                                     <div id="travelDate"></div>
+                                    <div id="travelDateGtSeven"></div>
                                 </div>                                
                             </header>
                     </article>
