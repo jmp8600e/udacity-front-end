@@ -101,6 +101,50 @@ const geonamesApi = async (url) => {
     }
 }
 
+  
+const darkskyApi = async (destData) => {
+    try {
+        const url = 'https://api.darksky.net/forecast'; //holds darksky initial url prepending by heroku so allows non-cors calls
+        const apikey = process.env.API_KE_DarkSky;
+        let fullurl
+        if(destData.travelDateGtSeven == 0){
+            fullurl = `${url}/${apikey}/${destData.lat},${destData.lng}?exclude=minutely,hourly,flags` // creating full url
+        }
+        else {
+            fullurl = `${url}/${apikey}/${destData.lat},${destData.lng},${destData.travelDateGtSeven}?exclude=minutely,hourly,flags`
+        }  
+        const response = await fetch(fullurl);
+        const darkskyData = await response.json();        
+        if (darkskyData.code == 400){
+            destData.darkskycode = 400;
+        } 
+        else {
+            destData.TZ = darkskyData.timezone;
+            destData.dailySummary = darkskyData.daily.summary;
+            let dailyInfo = [];
+            for (const day of darkskyData.daily.data) {
+              dailyInfo.push({
+                    "time": day.time,
+                    "summary": day.summary,
+                    "icon": day.icon,
+                    "sunriseTime": day.sunriseTime,
+                    "sunsetTime": day.sunsetTime,
+                    "precipProbability": day.precipProbability,
+                    "temperatureHigh": day.temperatureHigh,
+                    "temperatureLow": day.temperatureLow,
+                    "humidity": day.humidity,
+              });             
+            }    
+            destData.daily = dailyInfo;
+        }    
+        return destData;
+    }
+    catch (error) {
+        destData.error = error;
+        return destData;
+    }   
+}
+
 //Geonames API endpoint
 app.get('/getFromGeonames/:destInfo/:travelDate', function (req, res) {   
     const url = 'http://api.geonames.org/searchJSON?q=' // this remains constant
@@ -109,23 +153,29 @@ app.get('/getFromGeonames/:destInfo/:travelDate', function (req, res) {
     let today = new Date(); // geting today's current time
     let todayDate = (new Date(today.getFullYear(),today.getMonth(),today.getDate()).getTime() / 1000) - (today.getTimezoneOffset()*60)// getting today's date in GMT hence offset subtracted from the date this is bit complicated
 
-    let username = process.env.USERNAME_GeoNames; // getting this from .env file
+    const username = process.env.USERNAME_GeoNames; // getting this from .env file
     const fullurl = `${url}${destInfo}&maxRows=1&username=${username}` // creating full url
+    //console.log(fullurl);
     //calling async function to get data from geonames
     geonamesApi(fullurl).then(function(destData){
         //destData = geonamesData;
-        console.log(travelDate);
         if (((travelDate - todayDate)/86400) > 7){
             destData.travelDateGtSeven = travelDate;
+            darkskyApi(destData).then(function(destData){
+               res.send(destData); 
+            })
         }
         else if (((travelDate - todayDate)/86400) < 0){
-            console.log(travelDate - todayDate);
             destData.travelDateGtSeven = -1;
         }
         else {
             destData.travelDateGtSeven = 0;
+            darkskyApi(destData).then(function(destData){
+               res.send(destData); 
+            })
+            
         }
-        res.send(destData);
+        //res.send(destData);
     });
 });
 
