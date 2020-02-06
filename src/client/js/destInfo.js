@@ -1,4 +1,4 @@
-//start of Aylien API call
+//start of the API call
 const getDestinationInfo = ()=>{
     let destValue = encodeURIComponent(document.getElementById("destValue").value) //get the form value and properly enconde it as browser url
     let dateValue = document.getElementById("dateValue").value //getting travel date as human readable format yyyy-mm-dd
@@ -15,8 +15,8 @@ const getDestinationInfo = ()=>{
            
         }, 10000);
     }, 0);
-    // calling openAylienClassifyApi function, chained promises which gets API data and updates the UI
-    getGeonamesData(destValue,dateValueEpoch).then(function(projectData){
+    // calling getDestinationData function, chained promises which gets API data and updates the UI
+    getDestinationData(destValue,dateValueEpoch).then(function(projectData){
         //updateUI after successfull execution of POST data
         document.getElementsByClassName('bar-container active')[0].remove(); //removal of progress bar
         projectData.dest = document.getElementById("destValue").value;
@@ -24,7 +24,7 @@ const getDestinationInfo = ()=>{
         console.log(projectData);
         updateUI(projectData);
     }).catch(function(error){
-        // incase error from the Aylien API show a message on the UI that error has occured
+        // incase error from the API, show a message on the UI that error has occured
         updateUIError(error);
       });
 
@@ -33,8 +33,8 @@ const getDestinationInfo = ()=>{
 
 
 // get data from node endpoint getURLClassification - this is async function
-const getGeonamesData = async (destValue,dateValueEpoch)=>{
-    let apiUrl = 'http://localhost:3001/getFromGeonames' // holding initial part of api url for Aylien classify API
+const getDestinationData = async (destValue,dateValueEpoch)=>{
+    let apiUrl = 'http://localhost:3001/getDestData' // holding initial part of api url for the API
     let fullUrl = `${apiUrl}/${destValue}/${dateValueEpoch}`; //creating full API url
     console.log(fullUrl);
     const urlData = await fetch(fullUrl); // awaiting to get the data

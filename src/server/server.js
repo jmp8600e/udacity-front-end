@@ -54,27 +54,6 @@ app.get('/projectData', function (req, res) {
 
 let destData = {}; //initializing dictionary 
 
-// does not work as expected....so moving to node-fetch
-const request = require('request');
-
-app.get('/getFromGeonames2', function (req, res) {    
-   request('http://api.geonames.org/searchJSON?q=london%20England&maxRows=1&username=jmp8600e', { json: true }, (err, res2, body) => {
-      if (err) { 
-        cordinatesData.error = err;
-      } else {    
-        if (body.totalResultsCount === 0){
-            cordinatesData.totalResultsCount = 0;
-        } else {
-            cordinatesData.totalResultsCount = body.totalResultsCount;
-            cordinatesData.lng = body.geonames[0].lng;
-            cordinatesData.lat = body.geonames[0].lat;
-        }
-      }
-      res.send(cordinatesData);
-    });    
-});
-
-
 // node-fetch is working properly as it suports async, await 
 const fetch = require("node-fetch");
 
@@ -83,7 +62,6 @@ const geonamesApi = async (url) => {
     try {
         const response = await fetch(url);
         const geonamesData = await response.json();
-        //console.log(geonamesData);
         if (geonamesData.totalResultsCount === 0){
             destData = {};
             destData.totalResultsCount = 0;
@@ -101,21 +79,24 @@ const geonamesApi = async (url) => {
     }
 }
 
-  
+// async darksky api call function  
 const darkskyApi = async (destData) => {
     try {
-        const url = 'https://api.darksky.net/forecast'; //holds darksky initial url prepending by heroku so allows non-cors calls
-        const apikey = process.env.API_KE_DarkSky;
+        const url = 'https://api.darksky.net/forecast'; //holds darksky initial url
+        const apikey = process.env.API_KEY_DarkSky; //getting key from .env file
         let fullurl
         if(destData.travelDateGtSeven == 0){
+            //if travel within seven days from today...
             fullurl = `${url}/${apikey}/${destData.lat},${destData.lng}?exclude=minutely,hourly,flags` // creating full url
         }
         else {
+            //if travel after seven days from today...
             fullurl = `${url}/${apikey}/${destData.lat},${destData.lng},${destData.travelDateGtSeven}?exclude=minutely,hourly,flags`
         }  
         const response = await fetch(fullurl);
         const darkskyData = await response.json();        
         if (darkskyData.code == 400){
+            // nothing found from darkSky API
             destData.darkskycode = 400;
         } 
         else {
@@ -145,8 +126,33 @@ const darkskyApi = async (destData) => {
     }   
 }
 
+// async pixabay api call function
+const pixabayApi = async (destInfo,destData) => {
+    try{
+        const url = 'https://pixabay.com/api/?key='; //holds pixabay initial url
+        const apikey = process.env.API_KEY_Pixabay; //getting key from .env file   
+        let fullurl = `${url}${apikey}&q=${destInfo}&image_type=photo&orientation=horizontal&category=travel`
+        console.log(fullurl);
+        const response = await fetch(fullurl);
+        const pixabayData = await response.json();    
+        if (pixabayData.totalHits > 0){
+            let weburl = pixabayData.hits[0].webformatURL;
+            destData.imgURL = weburl.replace('640.', '340.');
+        }
+        else{
+            destData.pixabaycode = 400;
+        }
+        return destData;
+    }
+    catch (error) {
+        destData.error = error;
+        return destData;        
+    }
+    
+}
+
 //Geonames API endpoint
-app.get('/getFromGeonames/:destInfo/:travelDate', function (req, res) {   
+app.get('/getDestData/:destInfo/:travelDate', function (req, res) {   
     const url = 'http://api.geonames.org/searchJSON?q=' // this remains constant
     let destInfo = `${req.params.destInfo}`;  
     let travelDate = `${req.params.travelDate}`;
@@ -158,24 +164,34 @@ app.get('/getFromGeonames/:destInfo/:travelDate', function (req, res) {
     //console.log(fullurl);
     //calling async function to get data from geonames
     geonamesApi(fullurl).then(function(destData){
-        //destData = geonamesData;
-        if (((travelDate - todayDate)/86400) > 7){
-            destData.travelDateGtSeven = travelDate;
-            darkskyApi(destData).then(function(destData){
-               res.send(destData); 
-            })
+        if(destData.totalResultsCount > 0){
+            // only make calls to other APIs if geonamesapi returns results
+            if (((travelDate - todayDate)/86400) > 7){
+                destData.travelDateGtSeven = +travelDate + +(today.getTimezoneOffset()*60); // this is needed to conver to GMT                
+                darkskyApi(destData).then(function(destData){
+                   destData.travelDateEpoch = +travelDate + +today.getTimezoneOffset()*60; // this is needed in order to tell which day to display on the UI +s convers string to numbers
+                   //finally call pixabayApi
+                   pixabayApi(destInfo,destData).then(function(destData){res.send(destData);})                    
+                })
+            }
+            else if (((travelDate - todayDate)/86400) < 0){
+                destData.travelDateGtSeven = -1;
+                res.send(destData); 
+            }
+            else {
+                destData.travelDateGtSeven = 0;
+                darkskyApi(destData).then(function(destData){
+                   destData.travelDateEpoch = +travelDate + +today.getTimezoneOffset()*60; // this is needed in order to tell which day to display on the UI
+                   //finally call pixabayApi
+                   pixabayApi(destInfo,destData).then(function(destData){res.send(destData);})
+                })
+                
+            }
         }
-        else if (((travelDate - todayDate)/86400) < 0){
-            destData.travelDateGtSeven = -1;
+        else{
+            // if no results are coming back from geonamesapi then just send the data as is
+            res.send(destData);
         }
-        else {
-            destData.travelDateGtSeven = 0;
-            darkskyApi(destData).then(function(destData){
-               res.send(destData); 
-            })
-            
-        }
-        //res.send(destData);
     });
 });
 
