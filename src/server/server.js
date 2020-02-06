@@ -66,6 +66,7 @@ const geonamesApi = async (url) => {
             destData = {};
             destData.totalResultsCount = 0;
         } else {
+            destData = {};
             destData.totalResultsCount = geonamesData.totalResultsCount;
             destData.lng = geonamesData.geonames[0].lng;
             destData.lat = geonamesData.geonames[0].lat;
@@ -132,14 +133,16 @@ const pixabayApi = async (destInfo,destData) => {
         const url = 'https://pixabay.com/api/?key='; //holds pixabay initial url
         const apikey = process.env.API_KEY_Pixabay; //getting key from .env file   
         let fullurl = `${url}${apikey}&q=${destInfo}&image_type=photo&orientation=horizontal&category=travel`
-        console.log(fullurl);
         const response = await fetch(fullurl);
-        const pixabayData = await response.json();    
+        const pixabayData = await response.json();   
+
         if (pixabayData.totalHits > 0){
+            // if data found
             let weburl = pixabayData.hits[0].webformatURL;
             destData.imgURL = weburl.replace('640.', '340.');
         }
         else{
+            //if no data found make the code to 400 (not found)
             destData.pixabaycode = 400;
         }
         return destData;
@@ -158,10 +161,10 @@ app.get('/getDestData/:destInfo/:travelDate', function (req, res) {
     let travelDate = `${req.params.travelDate}`;
     let today = new Date(); // geting today's current time
     let todayDate = (new Date(today.getFullYear(),today.getMonth(),today.getDate()).getTime() / 1000) - (today.getTimezoneOffset()*60)// getting today's date in GMT hence offset subtracted from the date this is bit complicated
-
     const username = process.env.USERNAME_GeoNames; // getting this from .env file
     const fullurl = `${url}${destInfo}&maxRows=1&username=${username}` // creating full url
-    //console.log(fullurl);
+    let destData = {};//initializing empty directory
+    
     //calling async function to get data from geonames
     geonamesApi(fullurl).then(function(destData){
         if(destData.totalResultsCount > 0){
