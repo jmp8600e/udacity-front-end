@@ -221,6 +221,15 @@ const updateUIError = (error)=>{
     displayDiv.innerHTML = `<b>${error}</b>`
 }
 
+//jest  test function
+
+function testapi(destValue,dateValueEpoch){
+    console.log(getDestinationData(destValue,dateValueEpoch).length);
+    return getDestinationData(destValue,dateValueEpoch).length;
+}
+
+// comment below line when doing a webpack build as it breaks webpack, uncomment while performing jest test
+//module.exports = testapi;
 
 // exporting it for webpack
 export { getDestinationInfo };
