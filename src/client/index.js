@@ -1,11 +1,7 @@
-import { getAylienURLInfo } from './js/aylienURL'
-import { openAylienClassifyApi } from './js/aylienURL'
-import { updateUI } from './js/aylienURL'
-import { updateUIError } from './js/aylienURL'
-import { getAylienTXTInfo } from './js/aylienTXT'
-import { openAylienTXTApi } from './js/aylienTXT'
-import { updateUI2 } from './js/aylienTXT'
-import { updateUIError2 } from './js/aylienTXT'
+import { getDestinationInfo } from './js/destInfo'
+import { getDestinationData } from './js/destInfo'
+import { updateUI } from './js/destInfo'
+import { updateUIError } from './js/destInfo'
 
 import './styles/main.scss'
 import './styles/form.scss'
@@ -13,15 +9,35 @@ import './styles/footer.scss'
 import './styles/header.scss'
 
 
+//const pathToSleet = require('./img/sleet.png');
+
+//const getSleet = () => `<img src='${pathToSleet}' alt='sleet    ' />`;
+
+
+const pathToImages = require.context('./img', true);
+// true here is for use subdirectories, you can also specify regex as third param
+
+const images = [
+    'clear-day.png',
+    'clear-night.png',
+    'cloudy.png',
+    'fog.png',
+    'img-not-found.png',
+    'partly-cloudy-day.png',
+    'partly-cloudy-night.png',
+    'rain.png',
+    'sleet.png',
+    'snow.png',
+    'wind.png'    
+];
+
+const getImages = () => images.map(name => `<img src='${pathToImages(name, true)}' alt='${name}' />`);
+
 // below are exported because output in webpack.dev/pord.js can use it
 export {
-    getAylienURLInfo,
-    openAylienClassifyApi,
+    getDestinationInfo,
+    getDestinationData,
     updateUI,
-    updateUIError,
-    getAylienTXTInfo,
-    openAylienTXTApi,
-    updateUI2,
-    updateUIError2   
+    updateUIError  
 }
 

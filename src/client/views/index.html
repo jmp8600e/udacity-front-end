@@ -3,10 +3,10 @@
     <head>
         <meta charset="utf-8">
         <title>Travel Companion</title>
-        <link rel="stylesheet" href="../styles/main.css">
+        <!--<link rel="stylesheet" href="../styles/main.css">
         <link rel="stylesheet" href="../styles/header.css">
         <link rel="stylesheet" href="../styles/form.css">
-        <link rel="stylesheet" href="../styles/footer.css">     
+        <link rel="stylesheet" href="../styles/footer.css">   -->  
     </head>
     <body>
         <!-- sidebar https://colorlib.com/preview/#opium-->
@@ -26,7 +26,7 @@
                                     <h3>Travel Companion!!</h3>
                                     <p>This app will help organize your travel. Enter your destination information and date you are travelling and it will provide Weather Related information and other information that might help you organize your trip!</p>
                                     <!-- form name CANNOT be same as onsubmit return funtction-->
-                                    <form name="getInfo" action="/" onsubmit="return getDestinationInfo()">
+                                    <form name="getInfo" action="/" onsubmit="return Client.getDestinationInfo()">
                                       <label for="dest">Enter Destination:</label>
                                       <input type="text" id="destValue" name="destVal" required><br>
                                       <label for="date">Enter Date:</label>
@@ -56,7 +56,7 @@
             </div>
          </div> 
      <!-- we would not need below since we are using webpack -->
-    <script src="../js/destInfo.js"></script>
+    <!--<script src="../js/destInfo.js"></script> -->
      <!-- below for offline access -->
     <script>
         // Check that service workers are supported

@@ -1,5 +1,5 @@
 //start of the API call
-const getDestinationInfo = ()=>{
+const getDestinationInfo = () => {
     let destValue = encodeURIComponent(document.getElementById("destValue").value) //get the form value and properly enconde it as browser url
     let dateValue = document.getElementById("dateValue").value //getting travel date as human readable format yyyy-mm-dd
     let dateValueEpoch = document.getElementById("dateValue").valueAsNumber/1000 //getting travel date as Epoch
@@ -21,16 +21,16 @@ const getDestinationInfo = ()=>{
     displayDiv.innerHTML = ``;
     
     // calling getDestinationData function, chained promises which gets API data and updates the UI
-    getDestinationData(destValue,dateValueEpoch).then(function(projectData){
+    Client.getDestinationData(destValue,dateValueEpoch).then(function(projectData){
         //updateUI after successfull execution of POST data
         document.getElementsByClassName('bar-container active')[0].remove(); //removal of progress bar
         projectData.dest = document.getElementById("destValue").value;
         projectData.dateValue = dateValue;
         console.log(projectData);
-        updateUI(projectData);
+        Client.updateUI(projectData);
     }).catch(function(error){
         // incase error from the API, show a message on the UI that error has occured
-        updateUIError(error);
+        Client.updateUIError(error);
       });
 
    return false; // this is very important otherwise user will be moved away from the current page
@@ -127,9 +127,9 @@ const updateUI = (projectData) => {
                 for (const day of projectData.daily) {
                     //populating empty array with dictionary data
                     let tempTime = new Date(day.time*1000);
-                    yyyy = tempTime.getFullYear()
-                    mm = ('0' + (tempTime.getMonth() + 1)).slice(-2)
-                    dd = ('0' + tempTime.getDate()).slice(-2)
+                    let yyyy = tempTime.getFullYear()
+                    let mm = ('0' + (tempTime.getMonth() + 1)).slice(-2)
+                    let dd = ('0' + tempTime.getDate()).slice(-2)
                     let tempDate = `${yyyy}-${mm}-${dd}`;   //This will be used so that UI can pickup right day from the 7 - day weather Array
                     //below is bit HARD - you dont want to compare date if travel date is more than 7 days away since there is only one object in the array
                     if(tempDate == projectData.dateValue|| projectData.travelDateGtSeven>7){
@@ -163,20 +163,20 @@ const updateUI = (projectData) => {
                         if(day.icon && day.temperatureHigh && day.temperatureLow){
                             tempdiv = document.createElement('div');
                             tempdiv.setAttribute('class','high-img-low');
-                            hdiv = document.createElement('div');
+                            let hdiv = document.createElement('div');
                             hdiv.setAttribute('id','temperatureHigh');
                             hdiv.innerHTML = `High<br><b>${day.temperatureHigh} &#x2109;</b>`;
                             
-                            idiv = document.createElement('div');
+                            let idiv = document.createElement('div');
                             idiv.setAttribute('id','icon');
                             idiv.setAttribute('name',`${day.icon}`);
-                            img = document.createElement('img');
-                            img.setAttribute('src',`../img/${day.icon}.png`);
+                            let img = document.createElement('img');
+                            img.setAttribute('src',`./${day.icon}.png`);
                             img.setAttribute('style',"width:64px;height:64px;");                            
                             idiv.appendChild(img);
                             
                             
-                            ldiv = document.createElement('div');
+                            let ldiv = document.createElement('div');
                             ldiv.setAttribute('id','temperatureLow');
                             ldiv.innerHTML = `High<br><b>${day.temperatureLow} &#x2109;</b>`;
                             
@@ -187,28 +187,6 @@ const updateUI = (projectData) => {
                             displayDiv.appendChild(tempdiv);
                             
                         }                        
-                        /*if(day.icon){
-                            tempdiv = document.createElement('div');
-                            tempdiv.setAttribute('id','icon')
-                            tempdiv.setAttribute('name',`${day.icon}`)
-                            img = document.createElement('img');
-                            img.setAttribute('src',`../img/${day.icon}.png`);
-                            img.setAttribute('style',"width:64px;height:64px;");
-                            tempdiv.appendChild(img);
-                            displayDiv.appendChild(tempdiv);
-                        }                        
-                        if(day.temperatureHigh){
-                            tempdiv = document.createElement('div');
-                            tempdiv.setAttribute('id','temperatureHigh')
-                            tempdiv.innerHTML = `<b>Day's High:</b> ${day.temperatureHigh} &#x2109;`;
-                            displayDiv.appendChild(tempdiv);                    
-                        }      
-                        if(day.temperatureLow){
-                            tempdiv = document.createElement('div');
-                            tempdiv.setAttribute('id','temperatureLow')
-                            tempdiv.innerHTML = `<b>Day's Low:</b> ${day.temperatureLow} &#x2109;`;
-                            displayDiv.appendChild(tempdiv);                    
-                        }      */
                         if(day.humidity){
                             tempdiv = document.createElement('div');
                             tempdiv.setAttribute('id','humidity')
@@ -231,73 +209,9 @@ const updateUI = (projectData) => {
         
     }  catch(error) {
         //console.log("error", error);
-        updateUIError(error);
+        Client.updateUIError(error);
     }    
 }
-
-
-
-/*const updateUI = (projectData) => {
-    try {
-        //getting all the divs where data needs to be populated
-        let div1 = document.getElementById('countryName');
-        let div2 = document.getElementById('lat');
-        let div3 = document.getElementById('lng');
-        let div4 = document.getElementById('dest');
-        let div5 = document.getElementById('travelDate');
-        let div6 = document.getElementById('travelDateGtSeven');
-        
-        // if error is not there in the data
-        if(!projectData.error){
-            if(projectData.totalResultsCount == 0||projectData.travelDateGtSeven < 0){
-                // this means zero results found so users has entered improper destination info
-                div1.setAttribute('class','error') // creating class error for red color
-                if (projectData.totalResultsCount == 0){
-                    div1.innerHTML = `<b>Destination NOT found. Please put proper destination.</b>`
-                } 
-                else {
-                    div1.innerHTML = `<b>Travel Date cannot be in past. Please use proper travel date.</b>`
-                }    
-                // setting all other divs to a blank value
-                div2.innerHTML = ``;
-                div3.innerHTML = ``;
-                div4.innerHTML = ``;
-                div5.innerHTML = ``;         
-                div6.innerHTML = ``;                 
-            } 
-            else {
-                div1.innerHTML = `<b>Country:</b> ${projectData.countryName}`;
-                if(div1.hasAttribute('class')){
-                    div1.removeAttribute('class'); // removal of class to remove red color
-                }
-                div2.innerHTML = `<b>Latitude:</b> ${projectData.lat}`;
-                div3.innerHTML = `<b>Longitude:</b> ${projectData.lng}`;
-                div4.innerHTML = `<b>Destination Entered:</b> ${projectData.dest}`;
-                div5.innerHTML = `<b>Date of Travel:</b> ${projectData.dateValue}`;
-                if(projectData.travelDateGtSeven){
-                    div6.innerHTML = `<b>More than 7 days in future:</b> ${projectData.travelDateGtSeven}`;
-                }
-                else {
-                    div6.innerHTML = ``;
-                }
-            }
-        } else {
-            // this means some sort of error 
-            div1.setAttribute('class','error') // creating class error for red color
-            div1.innerHTML = `<b>${projectData.error}</b>`
-            // setting all other divs to a blank value
-            div2.innerHTML = ``;
-            div3.innerHTML = ``;
-            div4.innerHTML = ``;
-            div5.innerHTML = ``;
-            div6.innerHTML = ``;            
-        }
-        
-    }  catch(error) {
-        //console.log("error", error);
-        updateUIError(error);
-    }    
-}*/
 
 // Below funciton will update ui properly incase of some error from any function (error which is not part of projectDta returned by the main function above)
 const updateUIError = (error)=>{
@@ -307,25 +221,11 @@ const updateUIError = (error)=>{
     displayDiv.innerHTML = `<b>${error}</b>`
 }
 
-/*
-document.getElementById("generate").addEventListener("click", function(){
-  //getDestinationInfo();  FIX LOGIC HERE NEEDS TO BE UNDER MAIN DIV 
-  let oldSaveButton = document.getElementById('saveBtn');
-  if(oldSaveButton){
-      oldSaveButton.remove();
-  }
-  let buttonLocation = document.getElementById('savebutton');
-  let btn = document.createElement('button')
-  btn.setAttribute('id','saveBtn');
-  btn.innerHTML = 'Save Trip';
-  buttonLocation.appendChild(btn);
-});*/
 
-
-/* exporting it for webpack
-export { getAylienURLInfo };
-export { openAylienClassifyApi };
+// exporting it for webpack
+export { getDestinationInfo };
+export { getDestinationData };
 export { updateUI };
-export { updateUIError };*/
+export { updateUIError };
 
   
