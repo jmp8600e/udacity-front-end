@@ -19,6 +19,9 @@ const getDestinationInfo = () => {
     //clearing existing data on the UI
     let displayDiv = document.getElementById('entryHolder');
     displayDiv.innerHTML = ``;
+    if(displayDiv.hasAttribute('class')){
+    displayDiv.removeAttribute('class'); // removal of class to remove red color if exist
+    }
     
     // calling getDestinationData function, chained promises which gets API data and updates the UI
     Client.getDestinationData(destValue,dateValueEpoch).then(function(projectData){
@@ -30,6 +33,7 @@ const getDestinationInfo = () => {
         Client.updateUI(projectData);
     }).catch(function(error){
         // incase error from the API, show a message on the UI that error has occured
+        document.getElementsByClassName('bar-container active')[0].remove();
         Client.updateUIError(error);
       });
 
@@ -88,7 +92,7 @@ const updateUI = (projectData) => {
                     img.setAttribute('src',`${projectData.imgURL}`);                    
                 }
                 else{
-                    img.setAttribute('src',"../img/img-not-found.png");
+                    img.setAttribute('src',"./img-not-found.png");
                 }
                 
                 fig.appendChild(img);
@@ -202,9 +206,12 @@ const updateUI = (projectData) => {
               displayDiv.appendChild(btn);                       
             }
         } else {
-            // this means some sort of error 
-            displayDiv.setAttribute('class','error') // creating class error for red color
-            displayDiv.innerHTML = `<b>${projectData.error}</b>`
+            // this means some sort of error
+            let errDiv = document.createElement('div');
+            errDiv.setAttribute('class','error'); // creating class error for red color
+            errDiv.setAttribute('id','error');
+            errDiv.innerHTML = `<b>${projectData.error}</b>`;
+            displayDiv.appendChild(errDiv);            
         }
         
     }  catch(error) {
@@ -217,9 +224,22 @@ const updateUI = (projectData) => {
 const updateUIError = (error)=>{
     //getting all the divs where data needs to be populated
     let displayDiv = document.getElementById('entryHolder');
-    displayDiv.setAttribute('class','error') // creating class error for red color
-    displayDiv.innerHTML = `<b>${error}</b>`
+    let errDiv = document.createElement('div');
+    errDiv.setAttribute('class','error'); // creating class error for red color
+    errDiv.setAttribute('id','error');
+    errDiv.innerHTML = `<b>${error}</b>`;
+    displayDiv.appendChild(errDiv);
 }
+
+//event listner added to add save button
+document.getElementById("generate").addEventListener("click", function(){
+  let displayDiv = document.getElementById('entryHolder');
+  let btn = document.createElement('button')
+  btn.setAttribute('id','saveBtn');
+  btn.innerHTML = 'Save Trip';
+  displayDiv.appendChild(btn);  
+});
+
 
 //jest  test function
 
@@ -236,5 +256,3 @@ export { getDestinationInfo };
 export { getDestinationData };
 export { updateUI };
 export { updateUIError };
-
-  
