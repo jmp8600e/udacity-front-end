@@ -1,11 +1,11 @@
 # Project: FEND Capstone (Travel Planner/Companion)
 
-This FEND Capstone  project is completed as per the project rubrics. This web application uses webpack. The web page asks for Destination information and date of travel. It then displays proper information as require by the project. Please check prerequisite sections to start the application. 
+This FEND Capstone  project is completed as per the project rubrics. This web application uses webpack. The web page asks for Destination information and date of travel. It then displays proper information as require by the project. Please check prerequisite sections to start the application. The application is created as per minimum requirements and I am working on adding more advanced features. These advanced features, I am not able to implement due to time constrain. 
 
 ## Grader Access info    
 - Download the complete project from the github 
 - Please check prerequisite section for all node, webpack and other dependancy  
-- open browser and use URL http://localhost:8081/ (PROD) to open the application
+- open browser and use URL http://localhost:3001/ (PROD) to open the application
 
 ## Prerequisite
 - Node must be installed, please make sure to install node from https://nodejs.org/en/download/ base on OS platform you are using
@@ -15,12 +15,22 @@ This FEND Capstone  project is completed as per the project rubrics. This web ap
    - npm install cors
    - npm install node-fetch
    - npm install dotenv
+   - npm install -D webpack-dev-server
+   - npm install -D @babel/core @babel/preset-env babel-loader
+   - npm install -D html-webpack-plugin
+   - npm install -D clean-webpack-plugin
+   - npm install -D style-loader
+   - npm install -D css-loader
+   - npm install -D file-loader
+   - npm install --save-dev jest
+   - npm install workbox-webpack-plugin --save-dev
+   - npm i -D style-loader node-sass css-loader sass-loader   
 
 -  The .env file must be present at the root of the project which should have username for GeoNames API, API Key for DarkSky and API key for Pixabay:
 ```
 USERNAME_GeoNames=**************************
-API_KE_DarkSky=**************************
-API_KE_Pixabay=**************************
+API_KEY_DarkSky=**************************
+API_KEY_Pixabay=**************************
 ```
 
 ## Running webpack build commmands
@@ -55,6 +65,10 @@ module.exports = testapi;
     - https://w3schools.com
     - https://developer.mozilla.org/
     - https://dillinger.io
+    - http://api.geonames.org
+    - https://darksky.net/dev/docs
+    - https://pixabay.com/api/docs/
+    - https://www.epochconverter.com/
 
 Thanks,
 Jatin
