@@ -54,7 +54,7 @@ Run following command to perform a test.
 npm run test
 ```
 
-The test only works when following line is uncommented from the **aylienTXT.js** script. Make sure to comment the line out **otherwise** webpack will create faulty code unhder dist folder. I had long messages with the mentor but she is not able to figure this issue and even I cannot. 
+The test only works when following line is uncommented from the **destInfo.js** script. Make sure to comment the line out **otherwise** webpack will create faulty code unhder dist folder. I had long messages with the mentor but she is not able to figure this issue and even I cannot. 
 ```
 module.exports = testapi;
 ```
