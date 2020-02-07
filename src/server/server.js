@@ -103,8 +103,9 @@ const darkskyApi = async (destData) => {
         else {
             destData.TZ = darkskyData.timezone;
             destData.dailySummary = darkskyData.daily.summary;
-            let dailyInfo = [];
+            let dailyInfo = []; //creating empty array
             for (const day of darkskyData.daily.data) {
+               //populating empty array with dictionary data
               dailyInfo.push({
                     "time": day.time,
                     "summary": day.summary,
@@ -158,7 +159,7 @@ const pixabayApi = async (destInfo,destData) => {
 app.get('/getDestData/:destInfo/:travelDate', function (req, res) {   
     const url = 'http://api.geonames.org/searchJSON?q=' // this remains constant
     let destInfo = `${req.params.destInfo}`;  
-    let travelDate = `${req.params.travelDate}`;
+    let travelDate = `${req.params.travelDate}`; //this is in GMT
     let today = new Date(); // geting today's current time
     let todayDate = (new Date(today.getFullYear(),today.getMonth(),today.getDate()).getTime() / 1000) - (today.getTimezoneOffset()*60)// getting today's date in GMT hence offset subtracted from the date this is bit complicated
     const username = process.env.USERNAME_GeoNames; // getting this from .env file
@@ -170,9 +171,9 @@ app.get('/getDestData/:destInfo/:travelDate', function (req, res) {
         if(destData.totalResultsCount > 0){
             // only make calls to other APIs if geonamesapi returns results
             if (((travelDate - todayDate)/86400) > 7){
-                destData.travelDateGtSeven = +travelDate + +(today.getTimezoneOffset()*60); // this is needed to conver to GMT                
+                destData.travelDateGtSeven = travelDate; // this is needed to conver to GMT                
                 darkskyApi(destData).then(function(destData){
-                   destData.travelDateEpoch = +travelDate + +today.getTimezoneOffset()*60; // this is needed in order to tell which day to display on the UI +s convers string to numbers
+                   destData.travelDateEpoch = travelDate; // this is needed in order to tell which day to display on the UI +s convers string to numbers
                    //finally call pixabayApi
                    pixabayApi(destInfo,destData).then(function(destData){res.send(destData);})                    
                 })
@@ -184,7 +185,7 @@ app.get('/getDestData/:destInfo/:travelDate', function (req, res) {
             else {
                 destData.travelDateGtSeven = 0;
                 darkskyApi(destData).then(function(destData){
-                   destData.travelDateEpoch = +travelDate + +today.getTimezoneOffset()*60; // this is needed in order to tell which day to display on the UI
+                   destData.travelDateEpoch = travelDate; // this is needed in order to tell which day to display on the UI
                    //finally call pixabayApi
                    pixabayApi(destInfo,destData).then(function(destData){res.send(destData);})
                 })

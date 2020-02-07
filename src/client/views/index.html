@@ -6,62 +6,55 @@
         <link rel="stylesheet" href="../styles/main.css">
         <link rel="stylesheet" href="../styles/header.css">
         <link rel="stylesheet" href="../styles/form.css">
-        <link rel="stylesheet" href="../styles/footer.css">
-     
+        <link rel="stylesheet" href="../styles/footer.css">     
     </head>
     <body>
         <!-- sidebar https://colorlib.com/preview/#opium-->
         <!-- section on left -->
-        <div class="grid-container">
- 
-        <!-- Header -->
-        <div id="header">
-            <div class="alignleft"><a href="index.html"  class="logo">Travel Planner</a></div>
-        </div>
-        <!-- actual blogs -->
-        <div id="main" role="main">    
-            <div class="flex-container-cards" id="urlInfo">
-                <div class="form-card">
-                    <article >
-                            <header>
-                                <h3>Travel Companion!!</h3>
-                                <p>This app will help organize your travel. Enter your destination information and date you are travelling and it will provide Weather Related information and other information that might help you organize your trip!</p>
-                                <!-- form name CANNOT be same as onsubmit return funtction-->
-                                <form name="getInfo" action="/" onsubmit="return getDestinationInfo()">
-                                  <label for="dest">Enter Destination:</label>
-                                  <input type="text" id="destValue" name="destVal" required><br>
-                                  <label for="date">Enter Date:</label>
-                                  <input type="date" id="dateValue" name="dateVal" required><br>                                  
-                                  <button type="submit" id="generate1">GO!</button>   
-                                </form><br>
-                                <!-- below holds divs for progres bar -->
-                                <div class="container"></div>
-                                <div style="display: none">
-                                    <div class="bar-container">
-                                        <div class="loader">
+         <div class="grid-container">
+     
+            <!-- Header -->
+            <div id="header">
+                <div class="alignleft"><a href="index.html"  class="logo">Travel Planner</a></div>
+            </div>
+            <!-- actual blogs -->
+            <div id="main" role="main">    
+                <div class="flex-container-cards" id="urlInfo">
+                    <div class="form-card">
+                        <article >
+                                <header>
+                                    <h3>Travel Companion!!</h3>
+                                    <p>This app will help organize your travel. Enter your destination information and date you are travelling and it will provide Weather Related information and other information that might help you organize your trip!</p>
+                                    <!-- form name CANNOT be same as onsubmit return funtction-->
+                                    <form name="getInfo" action="/" onsubmit="return getDestinationInfo()">
+                                      <label for="dest">Enter Destination:</label>
+                                      <input type="text" id="destValue" name="destVal" required><br>
+                                      <label for="date">Enter Date:</label>
+                                      <input type="date" id="dateValue" name="dateVal" required><br>                                  
+                                      <button type="submit" id="generate">GO!</button>   
+                                    </form><br>
+                                    <!-- below holds divs for progres bar -->
+                                    <div class="container"></div>
+                                    <div style="display: none">
+                                        <div class="bar-container">
+                                            <div class="loader">
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <!-- below holds divs for data returned by Aylien API -->                                
-                                <div id="entryHolder">
-                                    <div id="countryName"></div>
-                                    <div id="lat"></div>
-                                    <div id="lng"></div>
-                                    <div id="dest"></div>
-                                    <div id="travelDate"></div>
-                                    <div id="travelDateGtSeven"></div>
-                                </div>                                
-                            </header>
-                    </article>
+                                    <!-- below holds divs for data returned by Aylien API -->                                
+                                    <div id="entryHolder">
+                                    </div>                                 
+                                </header>
+                        </article>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div id="footer">
-            <footer>
-                <p>Created by: Jatin Patel &#169 2019</p>
-            </footer>
-        </div>
-     </div> 
+            <div id="footer">
+                <footer>
+                    <p>Created by: Jatin Patel &#169 2019</p>
+                </footer>
+            </div>
+         </div> 
      <!-- we would not need below since we are using webpack -->
     <script src="../js/destInfo.js"></script>
      <!-- below for offline access -->

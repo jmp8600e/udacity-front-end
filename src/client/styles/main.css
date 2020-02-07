@@ -1,3 +1,8 @@
+{
+  border-style: solid;
+  border-width: 1px;
+}
+
 body {
     line-height: 20px;
     font-size: 14px;
@@ -24,7 +29,25 @@ input,textarea {
 }
 
 
-
+@media(max-width:767px){
+#header{
+    Background-color: rgb(95,95,95);
+    color: #949494;
+    font-weight: 100;
+    font-family: "Lucida Console", Monaco, monospace;  
+    font-weight:normal;    
+}
+}
+@media(min-width:768px){
+#header{
+    Background-color: rgb(95,95,95);
+    color: #9b9b9b;
+    font-weight: 100;
+    width: 978px !important; 
+    font-family: "Lucida Console", Monaco, monospace;   
+    font-weight:normal;
+}
+}
 @media(max-width:767px){
 #main{
     background-color: #ffffff;
@@ -34,7 +57,7 @@ input,textarea {
 @media(min-width:768px){
 #main{
     background-color: #ffffff;
-    width: 99%;    
+    width: 955px;    
 }
 }
 
@@ -43,7 +66,7 @@ input,textarea {
     border: 1px solid #e9e9e9;
     padding: 10px;
     background-color: #f9f9ff;
-    height: 500px !important;
+    /*height: 940px !important;*/
     text-align: left;
 }
 
@@ -81,11 +104,10 @@ input,textarea {
 
 @media(min-width:768px){
 /* main cards horizontal flex*/
-.flex-container-cards {
+.flex-container-cards, {
   display: flex;
 }
 }
-
 /* vertical cards for mobile */
 @media(max-width:767px){
 .flex-container-cards {
@@ -186,4 +208,37 @@ color: #707070
 
 .active .loader2{
     width: 100%;
+}
+
+
+.destinfo-card{
+    border: 1px solid #e9e9e9;
+    padding: 10px;
+    background-color: #f9f9ff;
+    height: 430px !important;
+    width: 245px !important;
+    text-align: center;
+}
+
+
+figure {
+    float: left;
+    text-align: center;
+    font-style: italic;
+    font-size: smaller;
+    text-indent: 0;
+    border: thin silver solid;
+    margin: 0.5em;
+    padding: 0.5em;
+}
+
+.high-img-low {
+  display: flex;
+}
+
+.high-img-low > div {
+  margin: 5px;
+  padding: 5px;
+  font-size: 14px;
+  text-align: center;
 }
