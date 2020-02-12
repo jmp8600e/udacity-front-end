@@ -30,6 +30,9 @@ const getDestinationInfo = () => {
         projectData.dest = document.getElementById("destValue").value;
         projectData.dateValue = dateValue;
         console.log(projectData);
+        //now storing the object in the session so it can be used for saving using localStorage when user clicks on Save Button
+        sessionStorage.setItem('projectData', JSON.stringify(projectData));        
+        //let retrievedObject = JSON.parse(sessionStorage.getItem('sessionObj');
         Client.updateUI(projectData);
     }).catch(function(error){
         // incase error from the API, show a message on the UI that error has occured
@@ -40,6 +43,14 @@ const getDestinationInfo = () => {
    return false; // this is very important otherwise user will be moved away from the current page
 }
 
+// storing in browser for good:
+/*let testObject = { 'one': 1, 'two': 2, 'three': 3 };
+localStorage.setItem('testObject', JSON.stringify(testObject));
+let retrievedObject = JSON.parse(localStorage.getItem('testObject');*/
+
+/*let testObject = { 'one': 1, 'two': 2, 'three': 3 };
+sessionStorage.setItem('testObject', JSON.stringify(testObject));
+let retrievedObject = JSON.parse(sessionStorage.getItem('testObject'));*/
 
 // get data from node endpoint getURLClassification - this is async function
 const getDestinationData = async (destValue,dateValueEpoch)=>{
@@ -203,7 +214,49 @@ const updateUI = (projectData) => {
               let btn = document.createElement('button')
               btn.setAttribute('id','saveBtn');
               btn.innerHTML = 'Save Trip';        
-              displayDiv.appendChild(btn);                       
+              displayDiv.appendChild(btn);     
+
+                //event listner added to save projectData
+                document.getElementById("saveBtn").addEventListener("click", function(){
+                    console.log('save btn click');
+                    let retrievedSessionObject = JSON.parse(sessionStorage.getItem('projectData'));
+                    let displayDiv = document.getElementById('entryHolder');
+                    if(!localStorage.destData){
+                        console.log('btn clicked');                        
+                        let destData = [];
+                        destData.push(retrievedSessionObject);
+                        localStorage.setItem('destData', JSON.stringify(destData));
+                        document.getElementById('saveBtn').remove();
+                        if(localStorage.destData){
+                            tempdiv = document.createElement('div');
+                            tempdiv.innerHTML = `<b>SAVED!!</b>`;
+                            displayDiv.appendChild(tempdiv);             
+                        } 
+                        else {
+                            tempdiv = document.createElement('div');
+                            tempdiv.setAttribute('class','error'); // creating class error for red color
+                            tempdiv.setAttribute('id','error');            
+                            tempdiv.innerHTML = `<b>UNABLE TO SAVE</b>`;
+                            displayDiv.appendChild(tempdiv);             
+                        }
+                    }
+                    else{
+                        console.log('inside else - btn clicked');
+                        let retrievedStorageObject = JSON.parse(localStorage.getItem('destData'));
+                        for (const dest of retrievedStorageObject){
+                            console.log(`${dest.dest.toLowerCase()}-${retrievedSessionObject.dest.toLowerCase()}-${dest.dateValue}-${retrievedSessionObject.dateValue}`);
+                            if (dest.dest.toLowerCase() == retrievedSessionObject.dest.toLowerCase() && dest.dateValue == retrievedSessionObject.dateValue){
+                                tempdiv = document.createElement('div');
+                                tempdiv.setAttribute('class','error'); // creating class error for red color
+                                tempdiv.setAttribute('id','error');            
+                                tempdiv.innerHTML = `<b>UNABLE TO SAVE - Destination and Travel Date combination already saved!!</b>`;
+                                displayDiv.appendChild(tempdiv);                                    
+                            }
+                        }
+                        
+                    }
+                });            
+              
             }
         } else {
             // this means some sort of error
@@ -231,14 +284,17 @@ const updateUIError = (error)=>{
     displayDiv.appendChild(errDiv);
 }
 
-//event listner added to add save button
-document.getElementById("generate").addEventListener("click", function(){
-  let displayDiv = document.getElementById('entryHolder');
-  let btn = document.createElement('button')
-  btn.setAttribute('id','saveBtn');
-  btn.innerHTML = 'Save Trip';
-  displayDiv.appendChild(btn);  
-});
+
+// storing in browser for good:
+/*let testObject = { 'one': 1, 'two': 2, 'three': 3 };
+localStorage.setItem('testObject', JSON.stringify(testObject));
+let retrievedObject = JSON.parse(localStorage.getItem('testObject');*/
+
+/*let testObject = { 'one': 1, 'two': 2, 'three': 3 };
+sessionStorage.setItem('testObject', JSON.stringify(testObject));
+let retrievedObject = JSON.parse(sessionStorage.getItem('testObject'));*/
+
+
 
 
 //jest  test function

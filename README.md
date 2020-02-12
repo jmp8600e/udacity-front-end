@@ -26,7 +26,7 @@ This FEND Capstone  project is completed as per the project rubrics. This web ap
    - npm install workbox-webpack-plugin --save-dev
    - npm i -D style-loader node-sass css-loader sass-loader   
 
--  The .env file must be present at the root of the project which should have username for GeoNames API, API Key for DarkSky and API key for Pixabay:
+-  The .env file **MUST** be present at the root of the project which should have username for **GeoNames API, API Key for DarkSky and API key for Pixabay PLEASE**:
 ```
 USERNAME_GeoNames=**************************
 API_KEY_DarkSky=**************************

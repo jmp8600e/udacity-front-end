@@ -120,6 +120,16 @@ const pixabayApi = async (destInfo,destData) => {
         if (pixabayData.totalHits > 0){
             // if data found
             let weburl = pixabayData.hits[0].webformatURL;
+            // on 2/11/20 the pixabay API started returing incorrect webformatURL as shown below with b' and ' in it so code below removes those bad character if those are present in the URL
+            //bad url - https://pixabay.com/get/b'57e8d3444f54a514f6da8c7dda79367b143fdce653566c4870277ad09048c15ab8'_340.jpg
+            //start of fix
+            let tmpurl;
+            if (weburl.includes("b'")){
+                tmpurl = weburl.replace("b'", "");    
+                tmpurl = tmpurl.replace("'", "");   
+                weburl = tmpurl;
+            }
+            //end of fix
             destData.imgURL = weburl.replace('640.', '340.');
         }
         else{
